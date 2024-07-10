@@ -1,0 +1,41 @@
+services:
+#  api-11:
+#    build:
+#      context: ./
+#      dockerfile: app/user-11/Dockerfile
+#    hostname: api
+#    ports:
+#      - "8080:8080"
+#    depends_on:
+#      db:
+#        condition: service_healthy
+#    environment:
+#      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/app
+#      - SPRING_DATASOURCE_USERNAME=admin
+#      - SPRING_DATASOURCE_PASSWORD=123456
+#      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
+#      - OTEL_EXPORTER_OTLP_PROTOCOL=grpc
+#      - OTEL_JAVAAGENT_LOGGING=simple
+
+  db:
+    image: postgres:16.2-alpine
+    hostname: db
+    environment:
+      - POSTGRES_DB=app
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=123456
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./volumes/db:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "sh -c 'pg_isready -U admin -d app'" ]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 5s
+
+networks:
+  default:
+    name: app-network
+    driver: bridge

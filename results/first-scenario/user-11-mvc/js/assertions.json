@@ -1,0 +1,10 @@
+{
+  "simulation": "ApiSimulation",
+  "simulationId": "apisimulation-20240823110917286",
+  "start": 1724411358449,
+  "description": "",
+  "scenarios": ["List Users", "Create and Get Users"],
+  "assertions": [
+
+  ]
+}

@@ -15,7 +15,7 @@ class UserRepositoryJPAReactive(
 ) : UserRepository {
 
     override suspend fun findById(id: Long): User? {
-        return coroutineScope { userRepository.findById(id).orElseGet(null) }
+        return coroutineScope { userRepository.findById(id).orElse(null) }
     }
 
     override suspend fun findAll(): Flow<User> {

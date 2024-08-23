@@ -18,7 +18,7 @@ import kotlin.random.Random
 
 class UserTest {
 
-    private val baseUri = "http://localhost/v1/users"
+    private val baseUri = "http://localhost:8080/v1/users"
 
     private fun mockUser(): User {
         val randomNumber = Random.nextInt(1, 1000)
